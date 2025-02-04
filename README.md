@@ -1,3 +1,43 @@
+# SimpleStorage Smart Contract
+
+This is a simple Solidity smart contract that allows users to store and retrieve their favorite number, as well as associate a name with a favorite number.
+
+## 📜 Contract Code
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+contract SimpleStorage {
+    uint256 myFavoriteNumber;
+
+    Person[] public listOfPeople;
+
+    struct Person {
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    mapping(string => uint256) public nameToFavoriteNumber;
+
+    function store(uint256 _favoriteNumber) public virtual {
+        myFavoriteNumber = _favoriteNumber;
+    }
+
+    function retrieve() public view returns (uint256) {
+        return myFavoriteNumber;
+    }
+
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        listOfPeople.push(Person(_favoriteNumber, _name));
+        nameToFavoriteNumber[_name] = _favoriteNumber;
+    }
+}
+
+
+
+
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
